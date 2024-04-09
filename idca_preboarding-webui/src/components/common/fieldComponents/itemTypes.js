@@ -1,0 +1,16 @@
+export default {
+	TaskName: 'TaskName',
+	ShortText: 'ShortText',
+	LongText: 'LongText',
+	URL: 'URL',
+	Attachment: 'Attachment',
+	DropDown: 'DropDown',
+	Image: 'Image',
+	Video: 'Vido',
+	TaskLibrary: 'TaskLibrary',
+	Upload: 'Upload',
+	Dates: 'Dates',
+	Title: 'Title',
+	Divider: 'Divider',
+	Accordian: 'Accordian',
+};

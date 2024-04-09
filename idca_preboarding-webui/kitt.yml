@@ -1,0 +1,44 @@
+profiles:
+  - node-static-nginx
+
+
+build:
+  artifact: "idca_preboarding-webui"
+  docker:
+    app:
+      # runtime: node-static-nginx
+      contextDir: "idca_preboarding-webui/"
+      buildArgs:
+        nginxVersion: 1.17.10
+        nodeVersion: 12.14.1
+        buildDir: build
+        wwwDir: /data/www
+deploy:
+  releaseType:
+    eployTimeout: 600
+  namespace: "idca-preboarding-webui"
+  helm:
+    values:
+      networking:
+        internalPort: 3000
+        httpsEnabled: true #if your need to enable https
+      min:
+        cpu: 100m
+        memory: 265Mi
+      max:
+        cpu: 300m
+        memory: 512Mi
+      readinessProbe:
+        path: "/"
+        wait: 120
+        port: 3000
+      livenessProbe:
+        enabled: "true"
+        headers: application/json, text/plain, text/html
+        probeInterval: 10
+        wait: 200
+        path: "/"
+        port: 3000
+        failureThreshold: 3
+
+      

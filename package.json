@@ -1,0 +1,34 @@
+{
+  "name": "idca-preboaring",
+  "version": "1.0.0",
+  "description": "Description for IDCA_Preboaring",
+  "author": "Walmart",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "IDCA_Preboaring-webui/build",
+    "IDCA_Preboaring-api",
+    "!IDCA_Preboaring-api/node_modules"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run build:server\" \"npm run build:client\"",
+    "run": "echo \"No run specified\"",
+    "build": "echo \"No build specified\"",
+    "build:client": "cd IDCA_Preboaring-webui && npm run build && cd ..",
+    "start:client:local": "cd IDCA_Preboaring-webui && REACT_APP_ENV=local REACT_APP_ZONE=south react-scripts start",
+    "install-client": "cd IDCA_Preboaring-webui && npm install --no-optional && cd ..",
+    "build:server": "cd IDCA_Preboaring-api && npm run build && cd ..",
+    "start:server:local": "cd IDCA_Preboaring-api && node target/index.js",
+    "install-server": "cd IDCA_Preboaring-api && npm install --no-optional && cd ..",
+    "test": "echo \"No test specified\""
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0"
+  },
+  "nodemonConfig": {
+    "delay": 500
+  }
+}

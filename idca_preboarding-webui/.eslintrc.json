@@ -1,0 +1,60 @@
+{
+	"extends": [
+		"airbnb-base",
+		"plugin:prettier/recommended",
+		"plugin:react/recommended",
+		"prettier",
+		"prettier/flowtype",
+		"prettier/babel",
+		"prettier/react"
+	],
+	"env": {
+		"es6": true,
+		"browser": true
+	},
+	"plugins": ["prettier"],
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": 2018
+	},
+	"rules": {
+		"prettier/prettier": "error", // turns on the rule provided by this plugin, which runs Prettier from within ESLint
+		"arrow-body-style": "off", // turns off two ESLint core rules that unfortunately are problematic with this plugin (arrow-body-style & prefer-arrow-callback). For more info visit https://github.com/prettier/eslint-plugin-prettier
+		"prefer-arrow-callback": "off", // turns off two ESLint core rules that unfortunately are problematic with this plugin (arrow-body-style & prefer-arrow-callback)
+		"import/prefer-default-export": 1,
+		"no-use-before-define": ["warn", { "functions": true, "classes": true }],
+		"no-unused-vars": "warn",
+		"no-console": ["warn", { "allow": ["warn", "error", "info"] }],
+		"no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
+		"prefer-const": "warn",
+		"prefer-template": "warn",
+		"prefer-destructuring": "warn",
+		"global-require": "warn",
+		"no-debugger": "warn",
+		"no-else-return": "warn",
+		"dot-notation": "warn",
+		"import/order": "warn",
+		"spaced-comment": "warn",
+		"react/prop-types": "off",
+		"object-shorthand": "off",
+		"radix": "off",
+		"func-names": "off",
+		"curly": [1, "all"],
+		"brace-style": ["warn", "1tbs"],
+		"import/newline-after-import": "warn",
+		"import/no-extraneous-dependencies": [
+			"error",
+			{ "devDependencies": false, "optionalDependencies": false, "peerDependencies": false }
+		],
+		"react/jsx-no-bind": [
+			0,
+			{
+				"ignoreRefs": false,
+				"allowArrowFunctions": true,
+				"allowBind": false,
+				"allowFunctions": true
+			}
+		]
+	}
+}

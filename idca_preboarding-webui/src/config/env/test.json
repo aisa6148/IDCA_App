@@ -1,0 +1,5 @@
+{
+  "secret": "justdoit",
+  "database": "mongodb://localhost:27017/armentumTest",
+  "SALT_WORK_FACTOR": 10
+}

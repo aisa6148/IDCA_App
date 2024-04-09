@@ -1,0 +1,130 @@
+{
+  "name": "idca-preboaring",
+  "description": "Description for IDCA_Preboaring",
+  "license": "MIT",
+  "version": "0.1.0",
+  "proxy": "http://localhost:5000",
+  "private": true,
+  "author": {
+    "name": "New Home Office Tech",
+    "email": "nhot@walmart.com"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-info": "^5.2.6",
+    "@storybook/addon-knobs": "^5.2.6",
+    "@storybook/addon-notes": "^5.2.6",
+    "@storybook/react": "^5.2.6",
+    "axios": "^0.19.2",
+    "clsx": "^1.1.1",
+    "cropperjs": "^1.5.11",
+    "dom-to-image-more": "^2.8.0",
+    "dotenv": "^10.0.0",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "1.7.1",
+    "file-saver": "^2.0.5",
+    "history": "^4.10.1",
+    "lodash": "^4.17.15",
+    "notistack": "^1.0.9",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-cropper": "^2.1.4",
+    "react-dnd": "^9.3.4",
+    "react-dnd-html5-backend": "^9.3.4",
+    "react-dom": "^16.12.0",
+    "react-image-file-resizer": "^0.4.3",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "3.2.0",
+    "react-select": "^3.0.8",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^5.2.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
+    "babel-jest": "^24.9.0",
+    "chroma-js": "^2.1.0",
+    "emotion": "^10.0.23",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "1.0.0-rc.15",
+    "jest": "^24.9.0",
+    "lint-staged": "^7.0.5",
+    "prettier": "1.15.2",
+    "react-jss": "^10.6.0",
+    "react-test-renderer": "16.6.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "cp nginx.conf build && cp fetch_env.js build",
+    "dev": "react-scripts start",
+    "start:dev": "REACT_APP_ENV=development REACT_APP_ZONE=south react-scripts start",
+    "start:local": "REACT_APP_ENV=local REACT_APP_ZONE=south react-scripts start",
+    "build:dev": "REACT_APP_ENV=development REACT_APP_ZONE=south react-scripts build",
+    "build:local": "REACT_APP_ENV=local REACT_APP_ZONE=south react-scripts build",
+    "test": "jest --coverage",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook",
+    "lint:fix": "eslint --fix .",
+    "prettier": "prettier --write \"**/*.js\"",
+    "precommit": "lint-staged",
+    "format": "prettier --trailing-comma es5 --single-quote --write 'packages/*/*.js' 'packages/*/!(node_modules)/**/*.js'"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "compilerOptions": {
+      "module": "commonjs",
+      "target": "es6"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!react-file-drop)"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "CI=true npm run test --env=jsdom && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --cache --fix",
+      "git add"
+    ]
+  }
+}

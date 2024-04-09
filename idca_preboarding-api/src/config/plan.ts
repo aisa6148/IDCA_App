@@ -1,0 +1,9 @@
+export const PLAN_STATUS = {
+	DRAFT: 'DRAFT',
+	ACTIVE: 'ACTIVE',
+	EDIT_ACTIVE: 'EDIT_ACTIVE',
+};
+
+export const PLAN_TYPES = {
+	PREONBOARDING: 'PREONBOARDING',
+};

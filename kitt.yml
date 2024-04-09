@@ -1,0 +1,65 @@
+profiles:
+  - node
+  - node-static-nginx
+  - "git://Tunr:strati-af-ccm2-assets:master:ccm2"
+
+
+services:
+  - path: idca_preboarding-webui/kitt.yml
+  - path: idca_preboarding-api/kitt.yml
+  
+owner:
+  group: "GTS-HR-Azure-NP-C"
+
+setup:
+  featureFlagMap:
+    buildWhenStageRefMatches: true
+
+deploy:
+  namespace: "idca-preboarding-app"
+  releaseType:
+    rollbackOnError: false
+    waitForReady: true
+    deployTimeout: 1500
+  stages:
+    - name: DEV
+      helm:
+        values:
+          networking:
+            httpsEnabled: true
+            httpEnabled: true
+            httpsRedirect: true
+          metadata:
+            labels:
+              Tunr.ServiceId: PER-BOARDING
+              Tunr.ServiceConfigVersion: pre-boarding2
+          env:
+            tunrConfigsDir: "/etc/config"
+            ENV: "dev"
+      refs: [master, branch]
+      target:
+        - cluster_id: [scus-dev-a3]
+
+    - name: STG
+      approvers:
+        groups:
+          - "GTS-HR-Azure-NP-C"
+      helm:
+        values:
+          networking:
+            httpsEnabled: true
+            httpEnabled: true
+            httpsRedirect: true
+          metadata:
+            labels:
+              Tunr.ServiceId: PER-BOARDING
+              Tunr.ServiceConfigVersion: pre-boarding2
+          env:
+            tunrConfigsDir: "/etc/config"
+            ENV: "stage"
+      refs: [master]
+      target:
+        - cluster_id: [scus-stage-a4]
+notify:
+  slack:
+    channelName: "idca-pre-boarding"

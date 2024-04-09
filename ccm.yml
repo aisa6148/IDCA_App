@@ -1,0 +1,149 @@
+---
+  metadata: 
+    serviceId: "PER-BOARDING"
+    serviceConfigVersion: "pre-boarding2"
+    tags: 
+      - "ccm-example"
+    authzPolicies: 
+      adminUI: 
+        adminGroups: 
+          - "GTS-HR-Azure-NP-C"
+      git: 
+        org: "GBOS"
+        repo: "IDCA-Preboarding"
+        branch: "master"
+    notifications: 
+      slack: 
+        channel: "idca-pre-boarding"
+  configDefinitions: 
+    appConfig: 
+      description: "Application Configurations"
+      resolutionPaths: 
+        - 
+          default: "/envProfile/envName"
+      properties: 
+        AZURE_BLOBINT_NEWSFEED_CONTAINER: 
+          description: "Azure Blob Container Preboarding"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "preboarding-blob1-dev"
+        COOKIE_UNENCRYPTED: 
+          description: "Cookies Unencrypted"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "true"
+        IAM__LOGOUT_URL: 
+          description: "ICA Logout URL"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "/api/logoutiam"
+        ICA__LOGOUT_URL: 
+          description: "ICA Logout URL"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "/api/logoutica"
+        PING__ASCIDX: 
+          description: "pingfed asc index"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "1"
+        PING__CALL_BACK: 
+          description: "pingfed call back url"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "https://idcapreboarding-webui-lab.idca-preboarding.k8s.glb.us.walmart.net/api/samlcallback"
+        PING__ENABLED: 
+          description: "pingfed enabled flag"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "true"
+        PING__ENTRY_POINT: 
+          description: "pingfed entry point url"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "https://pfeddev.wal-mart.com/idp/startSSO.ping?"
+        PING__ISSUER: 
+          description: "pingfed issuer"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "PF-DEVBOX"
+        PING__LOGOUT_URL: 
+          description: "pingfed logout url"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "https://pfeddev.wal-mart.com/ext/fedlogout"
+        PING__PARTNER_SPID: 
+          description: "pingfed partner spid"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "idca-preboarding"
+        PORT: 
+          description: "PORT"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "5000"
+        PREBOARDING_COSMOS_DATABASE: 
+          description: "cosmos db name"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "preboarding"
+        PREBOARDING_COSMOS_HOST: 
+          description: "cosmos db host"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "preboarding-dev-azure-cosmosdb.mongo.cosmos.azure.com"
+        PREBOARDING_COSMOS_USERNAME: 
+          description: "cosmos db username"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "preboarding-dev-azure-cosmosdb"
+        ROLE_SUPERADMIN_AD_GROUP: 
+          description: "ROLE SUPERADMIN AD GROUP"
+          type: "STRING"
+          kind: "SINGLE"
+          defaultValue: "CN=IDC-PREBOARDING-SUPERADMIN-DEV-LAB,OU=IDM,OU=ManualManaged,OU=Groups,OU=IDM,DC=Lab,DC=Wal-Mart,DC=com"
+  configOverrides: 
+    appConfig: 
+      - 
+        name: "DEV"
+        description: "app config override for dev-dev1 profile"
+        pathElements: 
+          envName: "dev"
+          envProfile: "dev"
+        value: 
+          properties: 
+            COOKIE_UNENCRYPTED: "true"
+            IAM__LOGOUT_URL: "/api/logoutiam"
+            ICA__LOGOUT_URL: "/api/logoutica"
+            PING__ASCIDX: "1"
+            PING__CALL_BACK: "https://idcapreboarding-webui-lab.idca-preboarding.k8s.glb.us.walmart.net/api/samlcallback"
+            PING__ENABLED: "true"
+            PING__ENTRY_POINT: "https://pfeddev.wal-mart.com/idp/startSSO.ping?"
+            PING__ISSUER: "PF-DEVBOX"
+            PING__LOGOUT_URL: "https://pfeddev.wal-mart.com/ext/fedlogout"
+            PING__PARTNER_SPID: "idca-preboarding"
+            PORT: "3005"
+            ROLE_SUPERADMIN_AD_GROUP: "CN=IDC-PREBOARDING-SUPERADMIN-DEV-LAB,OU=IDM,OU=ManualManaged,OU=Groups,OU=IDM,DC=Lab,DC=Wal-Mart,DC=com"
+      - 
+        name: "STG"
+        description: "app config override for stg-stage profile"
+        pathElements: 
+          envName: "stg"
+          envProfile: "stage"
+        value: 
+          properties: 
+            AZURE_BLOBINT_NEWSFEED_CONTAINER: "preboarding-blob1-dev"
+            COOKIE_UNENCRYPTED: "true"
+            IAM__LOGOUT_URL: "/api/logoutiam"
+            ICA__LOGOUT_URL: "/api/logoutica"
+            PING__ASCIDX: "1"
+            PING__CALL_BACK: "https://idcapreboarding-webui-lab.idca-preboarding.k8s.glb.us.walmart.net/api/samlcallback"
+            PING__ENABLED: "true"
+            PING__ENTRY_POINT: "https://pfeddev.wal-mart.com/idp/startSSO.ping?"
+            PING__ISSUER: "PF-DEVBOX"
+            PING__LOGOUT_URL: "https://pfeddev.wal-mart.com/ext/fedlogout"
+            PING__PARTNER_SPID: "idca-preboarding"
+            PORT: "3005"
+            ROLE_SUPERADMIN_AD_GROUP: "CN=IDC-PREBOARDING-SUPERADMIN-DEV-LAB,OU=IDM,OU=ManualManaged,OU=Groups,OU=IDM,DC=Lab,DC=Wal-Mart,DC=com"
+  apiVersion: "2.0"
+  kind: "ServiceConfig"

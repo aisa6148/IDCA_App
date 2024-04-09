@@ -1,0 +1,105 @@
+profiles:
+  - node
+
+
+build:
+  artifact: "idca_preboarding-api"
+  docker:
+    app:
+      runtime: node
+      contextDir: "idca_preboarding-api/"
+      buildArgs:
+        buildDir: "target"
+deploy:
+  releaseType:
+    deployTimeout: 600
+  namespace: "idca-preboarding-api"
+  helm:
+    values:
+      env:
+        STAGE_NAME: "{{$.kittExec.currentStage.name}}"
+        POD_NAME:
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        POD_NAMESPACE:
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        POD_UID:
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+      min:
+        cpu: 100m
+        memory: 265Mi
+      max:
+        cpu: 300m
+        memory: 512Mi
+      networking:
+        internalPort: 3005
+        httpsEnabled: true #if your need to enable https
+      readinessProbe:
+        path: "/api/v1/healthcheck"
+        wait: 400
+        port: 3005
+      livenessProbe:
+        enabled: "true"
+        headers: text/html
+        probeInterval: 10
+        wait: 420
+        path: "/api/v1/healthcheck"
+        port: 3005
+        failureThreshold: 3
+      secrets:
+        file_refresh: true
+        files:
+          - destination: /DB_PASSWORD.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#DB_PASSWORD"
+          - destination: /DATA_ENC_KEY.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#DATA_ENC_KEY"
+          - destination: /PING__CERT_BASE64.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#PING__CERT_BASE64"
+          - destination: /AZURE_BLOBLOG_ACCOUNT_KEY.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#AZURE_BLOBLOG_ACCOUNT_KEY"
+          - destination: /AZURE_BLOBINT_ACCOUNT_CONNSTRING.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#AZURE_BLOBINT_ACCOUNT_CONNSTRING"
+          - destination: /SESSION__KEY1.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#SESSION__KEY1"
+          - destination: /SESSION__KEY2.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#SESSION__KEY2"
+          - destination: /CLIENT_ID.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#CLIENT_ID"
+          - destination: /CLIENT_SECRET.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#CLIENT_SECRET"
+          - destination: /TENANTID.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#TENANTID"
+          - destination: /TEST_SECRET.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#TEST_SECRET"
+          - destination: /LOCATION_BENEFITS.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#LOCATION_BENEFITS"
+          - destination: /PREBOARDING_COSMOS_KEY.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#PREBOARDING_COSMOS_KEY"
+          - destination: /ICA_AUTH_TOKEN.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#ICA_AUTH_TOKEN"
+          - destination: /ICA_AUTH_TOKEN_SECRET.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#ICA_AUTH_TOKEN_SECRET"
+          - destination: /ICA_AUTH_TOKEN_SALT.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#ICA_AUTH_TOKEN_SALT"
+          - destination: /MEGHACACHE_HOST_ARRAY.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#MEGHACACHE_HOST_ARRAY"
+          - destination: /PREBOARDING_SQL_DB_PASSWORD.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#PREBOARDING_SQL_DB_PASSWORD"
+          - destination: /IAM_SVC_ACCOUNT_PVT_KEY.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#IAM_SVC_ACCOUNT_PVT_KEY"
+          - destination: /RSA_PRIVATE_KEY.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#RSA_PRIVATE_KEY"
+          - destination: /RSA_PUBLIC_KEY.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#RSA_PUBLIC_KEY"
+          - destination: /PASSPHARSE.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#PASSPHARSE"
+          - destination: /AZURE_BLOBFILEUPLOAD_ACCOUNT_CONNSTRING.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#AZURE_BLOBFILEUPLOAD_ACCOUNT_CONNSTRING"
+          - destination: /AZURE_BLOBFILEUPLOAD_ACCOUNT_CONTAINER.txt
+            content: "{{$.kittExec.currentStage.name}}/idca_preboarding-api#AZURE_BLOBFILEUPLOAD_ACCOUNT_CONTAINER"
+  

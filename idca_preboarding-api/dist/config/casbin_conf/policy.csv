@@ -1,0 +1,15 @@
+p, CANDIDATE, /api/testimonials/*, GET
+p, CANDIDATE, /api/newsfeed/*, GET
+p, CANDIDATE, /api/plans/*, GET
+p, CANDIDATE, /api/plan/fetch-media/*, POST
+p, CANDIDATE, /api/page/*, GET
+p, CANDIDATE, /api/page/fetch-media/*, POST
+p, CANDIDATE, /api/login/*, GET
+p, CANDIDATE, /api/markTaskComplete/*, POST
+p, CANDIDATE, /api/markTaskComplete/*, GET
+
+p, ADMIN, /api/newsfeed/*, *
+p, ADMIN, /api/page/*, *
+p, ADMIN, /api/plans/*, *
+p, ADMIN, /api/testimonials/*, *
+p, ADMIN, /api/markTaskComplete/*, *
